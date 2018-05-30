@@ -8,6 +8,8 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const expressValidator = require('express-validator');
 const bcrypt = require('bcryptjs');
+const path = require('path')
+const flash = require('connect-flash');
 
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
 const jsonParser = bodyParser.json();
@@ -16,6 +18,9 @@ const jsonParser = bodyParser.json();
 const { DATABASE_URL, PORT, SECRET } = require('./config');
 const app = express();
 mongoose.Promise = global.Promise;
+
+// Sets static public folder
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Bodyparser Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -29,9 +34,23 @@ app.use(session({
     saveUninitialized: false,
 }));
 
+// Connect Flash
+app.use(flash());
+
+// Connect Flash messages
+app.use(function (req, res, next) {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    res.locals.info_msg = req.flash('info_msg');
+    next();
+});
+
 // Express Validator
 const { check, validationResult } = require('express-validator/check');
 const { matchedData, sanitize } = require('express-validator/filter');
+
+app.use(expressValidator());
 
 // Passport Init
 app.use(passport.initialize());
@@ -58,6 +77,22 @@ function isLoggedIn(req, res, next) {
         res.redirect('/login');
     }
 }
+
+app.get('/', (req, res) => {
+    res.redirect('/login');
+});
+// Login Screen
+app.get('/login', (req, res) => {
+    res.sendFile('public/login.html' , { root : __dirname});
+});
+// Register
+app.get('/register', (req, res) => {
+    res.sendFile('public/register.html' , { root : __dirname});
+});
+app.get('/auth', isLoggedIn, (req, res) => {
+    res.sendFile('public/auth.html' , { root : __dirname});
+});
+
 
 // Initializing Server
 let server;
