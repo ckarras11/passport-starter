@@ -10,10 +10,8 @@ const router = express.Router();
 // Registers a new user in the DB
 router.post('/', (req, res) => {
     const name = req.body.name;
-    const companyCode = req.body.code;
     const email = req.body.email;
     const password = req.body.password;
-
     // Validation
     req.checkBody('name', 'Name is required').notEmpty();
     req.checkBody('email', 'Email is required').notEmpty();
@@ -23,7 +21,6 @@ router.post('/', (req, res) => {
     req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
     
     const errors = req.validationErrors();
-
     if (errors) {
         res.render('register', {
             errors,
@@ -31,7 +28,6 @@ router.post('/', (req, res) => {
     } else {
         const newUser = new User();
         newUser.name = name;
-        newUser.companyCode = companyCode;
         newUser.email = email;
         newUser.password = newUser.generateHash(password);
         User
