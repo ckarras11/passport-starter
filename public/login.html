@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <section class="login-container">
+        <form role="form" id="login" action="/login" method="POST">
+            <fieldset class="login">
+                <h3>Login</h3>
+                <div class="email input">
+                    <label for="email">Email:</label><br><br>
+                    <input id="email" name="email" type="email" placeholder="example@yoursite.com" required>
+                </div>
+                <div class="password input">
+                    <label for="password">Password:</label><br><br>
+                    <input id="password" name="password" type="password" placeholder="password" required>
+                </div>
+                <div class="button-container">
+                    <button class="submit" type="submit">Login</button><br>
+                </div>
+                <div class="forgot">
+                    <a href="/register">Don't have an account?</a>
+                </div>
+            </fieldset>
+            </form>
+    </section>
+    <script src="app.js"></script>
+</body>
+</html>

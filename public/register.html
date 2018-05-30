@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <section class="login-container">
+        <form role="form" id="register" action="/register" method="POST">
+            <fieldset class="login">
+                <h3>Create new account</h2>
+                <div class="input">
+                    <label for="name">Full Name:</label><br><br>
+                    <input id="name" name="name" type="text" placeholder="John Doe" required>
+                </div>
+                <div class="email input">
+                    <label for="code">Company Code:</label><br><br>
+                    <input id="code" name="code" type="text" placeholder="X36aEf" required>
+                </div>
+                <div class="email input">
+                    <label for="email">Email:</label><br><br>
+                    <input id="email" name="email" type="email" placeholder="example@yoursite.com" required>
+                </div>
+                <div class="password input">
+                    <label for="password">Password:</label><br><br>
+                    <input id="password" name="password" type="password" placeholder="password" required>
+                </div>
+                <div class="confirm-password input">
+                    <label for="confirm-password">Confirm Password:</label><br><br>
+                    <input id="confirm-password" name="password2" type="password" placeholder="password" required>
+                </div>
+                <div class="button-container">
+                    <button class="submit" type="submit">Register</button><br>
+                </div>
+            </fieldset>
+            </form>
+    </section>
+    <script src="app.js"></script>
+</body>
+</html>
